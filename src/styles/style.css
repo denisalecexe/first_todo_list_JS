@@ -1,0 +1,180 @@
+/* variabili css da riutilizzare */
+:root {
+    --bg-color: #101516;
+    --container-bg: #2a323f;
+    --text-color: #54e6d4;
+    --border-color: #feef4c;
+    --icon-add-color: #2cff05;
+    --icon-remove-color: #ef3131;
+    --bg-button-hover: #4144f3;
+}
+
+/* UNIVERSAL TAG */
+* {
+    /* fa in modo che il padding e il margin si aggiungano alla larghezza che si va ad impostare, 
+    per non fare "esplodere le dimensioni */
+    box-sizing: border-box;
+}
+
+/* TAG ELEMENT */
+body {
+    margin: 0;
+    color: var(--text-color);
+    background-color: var(--bg-color); /* Aggiunto qui per pulizia */
+}
+
+input[type="text"] {
+    color: var(--text-color);
+    font-size: 16px;
+    padding: 3px;
+}
+
+
+/* ID */
+#todo-input-area,
+#shop-input-area {
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    flex-grow: 1; /* fa in modo che prenda tutto lo spazio possibile, lasciando lo spazio necessatio al bottone */
+    background: transparent; /* Per farlo integrare meglio nel box .add-todo */
+    color: white;
+    padding: 5px;
+    width: 80%;
+}
+
+/* CLASS */
+.container {
+    min-height: 100vh; /* questo è quello che farebbe apportare la magia! */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* mette in colonna gli elementi */
+    background-color: var(--bg-color);
+}
+
+/* stile per gli li item */
+.todo-list li,
+.shopping-list li {
+    list-style: none; /* questo fa in modo di non mostrare il punto della lista non puntata */
+    font-size: 16px; /* questo va ad ingrandire tutto, sia testo che checkbox*/
+    margin-bottom: 8px; /* questo fa in modo di distanziare le task tra di loro */
+}
+
+/* stile per il checkbox */
+.todo-list li input[type="checkbox"],
+.shopping-list li input[type="checkbox"] {
+    transform: scale(1.5); /* Ingrandisce il quadrato del check per matchare il testo */
+    margin-right: 10px;    /* Spazio tra un check ed il testo */
+    vertical-align: middle; /* questo Li tiene sulla stessa linea senza Flex */
+}
+
+/* stile sia per li che per lo span */
+.todo-list li span,
+.shopping-list li span {
+    vertical-align: middle;
+}
+
+/* stile per qiando la task viene completata e gestito da javascript */
+.completed {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+/* per i bordi dei div figli di container */
+.todo,
+.shopping {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--container-bg);
+    border: 3px double var(--border-color);
+    width: 100%; /* Più flessibile */
+    max-width: 500px; /* limite massimo */
+    min-height: 250px;
+    height: auto; /* questo permette di far crescere il contenitore senza che esso si rompa */
+    margin: 15px 0;
+    padding: 10px;
+    border-radius: 15px; /* Arrotondato per estetica */
+}
+
+/* modifica riguardo il container dell'input dove scrivere le to do e il bottone */
+/* fa anche in modo di sembrare che il button sia all'interno dell'input, ma in realtà sono due elementi diversi e distinti */
+/* questa classe è il contenitore che racchiude input text e button */
+.add-todo,
+.add-shop {
+    display: flex;
+    gap: 10px;
+    padding: 8px;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    background: var(--bg-color);
+    margin-top: auto; /* per spostare più in basso di poco il box rispetto alla lista */
+    /* display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column; */
+}
+
+/* stile per i titoli */
+.title {
+    text-align: center;
+    font-size: 35px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin-bottom: 15px;
+}
+
+/* stile specifici per i button */
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    flex-grow: 1; /* fa in modo che prenda tutto lo spazio possibile */
+    padding: 5px;
+}
+
+/* css specifico per i bottoni (Classi raggruppate) */
+.btn-add,
+.btn-remove {
+    border: none;
+    border-radius: 10px;
+    padding: 4px;
+    background: var(--bg-color);
+    cursor: pointer;
+    /* Spostata qui per funzionare sia in entrata che in uscita */
+    transition: all 0.3s ease-in-out; 
+}
+
+/* Colori specifici per i bottoni ADD */
+.btn-add {
+    color: var(--icon-add-color);
+    border: 2px var(--icon-add-color) solid;
+}
+
+/* Colori specifici per i bottoni REMOVE */
+.btn-remove {
+    color: var(--icon-remove-color);
+    border: 2px var(--icon-remove-color) solid;
+
+}
+
+/* Hover per bottoni ADD */
+.btn-add:hover {
+    background: var(--icon-add-color);
+    color: var(--bg-color);
+}
+
+/* Hover per bottoni REMOVE */
+.btn-remove:hover {
+    background: var(--icon-remove-color);
+    color: var(--bg-color);
+}
+
+/* stile per l'icona nel button accanto alla scritta "aggiungi" */
+.bi-plus-circle,
+.bi-x-circle {
+    font-size: 1.2rem; /* Usiamo rem per scalabilità */
+}

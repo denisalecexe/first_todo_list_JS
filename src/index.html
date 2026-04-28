@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon/list-favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <title>Todo List Project</title>
+</head>
+<body>
+    <div class="container">
+        <!-- container per la sezione della todo lis -->
+        <div class="todo">
+            <h2 class="title">To Do list</h2>
+            <ul class="todo-list">
+            </ul>
+
+            <!-- sezione per l'input text e i bottoni della todo list -->
+            <div class="add-todo">
+                <input type="text" name="add-new-item" id="todo-input-area" placeholder="Add an element...">
+                <button type="submit" name="btn-remove" id="btn-remove-todo" class="btn btn-remove"><i class="bi bi-x-circle"></i></button>
+                <button type="submit" name="btn-add" id="btn-add-todo" class="btn btn-add"><i class="bi bi-plus-circle"></i></button>
+            </div>
+        </div>
+
+        <!-- container per la sezione della shopping list -->
+        <div class="shopping">
+            <h2 class="title">Shopping List</h2>
+            <ul class="shopping-list">
+            </ul>
+
+            <!-- sezione per l'input text e i bottoni della shopping list -->
+            <div class="add-shop">
+                <input type="text" name="add-new-item" id="shop-input-area" placeholder="Add an element...">
+                <button type="submit" name="btn-remove" id="btn-remove-shop" class="btn btn-remove"><i class="bi bi-x-circle"></i></button>
+                <button type="submit" mame="btn-add" id="btn-add-shop" class="btn btn-add"><i class="bi bi-plus-circle"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- collegamento a script.js -->
+    <script src="js/script.js"></script>
+</body>
+</html>

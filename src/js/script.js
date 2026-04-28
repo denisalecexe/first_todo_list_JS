@@ -1,0 +1,172 @@
+// 1. VARIABILI (il magazzino)
+// variabili costanti per inizializzare gli elementi su cui lavorare
+// input text area
+const todoInputArea = document.getElementById("todo-input-area"); // per la sezione di input dove mettere il testo della todo list
+const shopInputArea = document.getElementById("shop-input-area"); // per la sezione di input dove mettere il testo della shop list
+
+// button
+const btnAddTodo = document.getElementById("btn-add-todo"); // per il tasto add todo
+const btnRemoveTodo = document.getElementById("btn-remove-todo"); // per il tasto remove todo
+const btnAddShop = document.getElementById("btn-add-shop"); // per il taso add shop
+const btnRemoveShop = document.getElementById("btn-remove-shop"); // per il tasto remove shop
+
+// list
+const todoList = document.querySelector(".todo-list"); // per la lista to do
+const shopList = document.querySelector(".shopping-list"); // per la lista shopping
+
+// 2. FUNZIONI (la logica - la "ricetta")
+// funzione che aggiunge una task alla todo
+function addToDoTask() {
+    // inzializzazione e accesso all'elemento input HTML per l'input todo
+    const todoArea = todoInputArea.value;
+
+    //if statement per creare nuove task (li + span + checkbox + testo) in todo
+    if (todoArea !== "") {
+        // 1. CREAZIONE ELEMENTI
+        // crea un nuovo elemento li
+        const newTask = document.createElement("li");
+        // crea il checkbox
+        const checkbox = document.createElement("input");
+        // crea lo span per il testo della nuova task ed è l'etichetta
+        const taskText = document.createElement("span");
+        
+        // 2. CONFIGURAZIONE CHECKBOX E TESTO
+        // serve per il browser a definire l'identità dell'elemento
+        checkbox.type = "checkbox";
+        // questo mette il testo nell'etichetta
+        taskText.innerText = todoArea;
+
+        // funzione per migliorare e decorare il checkbox in todo
+        checkbox.addEventListener('change', function() {
+            // id statement usata per far capire se i checkbox sono stati cliccati o meno e hanno il loro stile
+            if(checkbox.checked) {
+                newTask.style.textDecoration = "line-through";
+            } else {
+                newTask.style.textDecoration = "none";
+            }
+        });
+
+        // 3. ASSEMBLAGGIO (Prima i pezzi piccoli, poi il pezzo grosso nel DOM)
+        newTask.appendChild(checkbox); // mostra il checkbox todo
+        newTask.appendChild(taskText); // si aggiunge l'etichetta all'elemento li in todo
+        todoList.appendChild(newTask); // mostra nella lista il nuovo elemento in todo
+
+        // 4. PUBBLICAZIONE
+        todoList.appendChild(newTask); 
+        todoInputArea.value = ""; // pulisce l'input del box HTML del todo
+    } else {
+        alert("Non hai scritto nessuna task da completare.")
+    }
+}
+
+// funzione che rimuove il testo dall'input to do list
+function clearTodoInput() {
+    // inizializzazione e accesso all'elemento input HTML per l'input todo
+    const clearTodo = todoInputArea.value;
+
+    // if statement per pulire all'interno dell'input todo
+    if (clearTodo !== "") {
+        todoInputArea.value = "";
+    } else {
+        alert("Non c'è niente da rimuovere nel campo.");
+    }
+}
+
+// funzione che aggiunge una stask alla shopping list
+function addShopTask() {
+    // inizializzazione e accesso all'elemento input HTML per l'input shop
+    const shopArea = shopInputArea.value;
+
+    //if statement per creare nuove task (li + span + checkbox + testo) in shop
+    if(shopArea !== "") {
+        // 1. CREAZIONE ELEMENTI
+        // crea un nuovo elemento li
+        const newShop = document.createElement("li");
+        // crea il checkbox
+        const checkbox = document.createElement("input");
+        // crea lo span per il testo della nuova task ed è l'etichetta
+        const shopText = document.createElement("span");
+
+        // 2. CONFIGURAZIONE CHECKBOX E TESTO
+        // serve per il browser a definire l'identità dell'elemento
+        checkbox.type = "checkbox";
+        // questo mette il testo nell'etichetta
+        shopText.innerText = shopArea;
+
+        // funzione per migliorare e decorare il checkbox in shop
+        checkbox.addEventListener('change', function() {
+        // id statement usata per far capire se i checkbox sono stati cliccati o meno e hanno il loro stile
+        if(checkbox.checked) {
+            newTask.style.textDecoration = "line-through";
+        } else {
+            newTask.style.textDecoration = "none";
+        }
+    });
+
+        // 3. ASSEMBLAGGIO (Prima i pezzi piccoli, poi il pezzo grosso nel DOM)
+        newShop.appendChild(checkbox); // mostra il checkbox shop
+        newShop.appendChild(shopText); // si aggiunge l'etichetta all'elemento li in shop
+        shopList.appendChild(newShop); // mostra nella lista il nuovo elemento in shop
+
+        // 4. PUBBLICAZIONE
+        shopList.appendChild(newShop); 
+        shopInputArea.value = ""; // pulisce l'input del box HTML del todo
+    } else {
+        alert("Non hai inserito nessun elemento da dover comprare.")
+    };
+}
+
+// funzione che rimuove il testo dall'input shopping list
+function clearShopInput() {
+    // inizializzazione e accesso all'elemento input HTML per l'input shop
+    const clearShop = shopInputArea.value;
+
+    // if statement per pulire all'interno dell'input shopping
+    if(clearShop !== "") {
+        shopInputArea.value = "";
+    } else {
+        alert("Non c'è niente da rimuovere nel campo.");
+    }
+}
+
+// 3. GLI EVENTI (i grilletti) PER TODO E SHOP
+// metodo addEventListener in modo da rendere cliccabile il bottone e l'input e creare la prima forma di dinamicità al sito
+// bottone add per to do list
+btnAddTodo.addEventListener('click', addToDoTask);
+// bottone remove per to do list
+btnRemoveTodo.addEventListener('click', clearTodoInput);
+// bottone add per la shop list
+btnAddShop.addEventListener('click', addShopTask); 
+
+// metodo addEventListener in modo da rendere Enter (invio) cliccabile per inviare la nuova task todo
+todoInputArea.addEventListener('keydown', (e_add_todo) => {
+    // if statement per rendere funzionante il tasto Enter in todo
+    if (e_add_todo.key === "Enter") {
+        addToDoTask();
+    }
+})
+
+// metodo addEventListener in modo da rendere Escape (Esc) cliccabile per pulire l'input todo
+todoInputArea.addEventListener('keydown', (e_clear_todo) => {
+    if (e_clear_todo.key === "Escape") {
+        clearTodoInput();
+    }
+})
+
+// metodo addEventListener in modo da rendere Enter (invio) cliccabile per inviare la nuova shop
+shopInputArea.addEventListener('keydown', (e_add_shop) => {
+    // if statement per rendere funzionanate il tasto Enter in shop
+    if (e_add_shop.key === "Enter") {
+        addShopTask();
+    }
+})
+
+// metodo addEventListener in modo da rendere Escape (Esc) cliccabile per pulire l'input shopping
+shopInputArea.addEventListener('keydown', (e_clear_shop) => {
+    if (e_clear_shop.key === "Escape") {
+        clearShopInput();
+    }
+})
+
+// 5. TEST PER VEDERE SE IL FOGLIO "SCRIPT.JS" FUNZIONA
+console.log("test veloce");
