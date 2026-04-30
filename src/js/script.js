@@ -14,6 +14,7 @@ const btnRemoveShop = document.getElementById("btn-remove-shop"); // per il tast
 const todoList = document.querySelector(".todo-list"); // per la lista to do
 const shopList = document.querySelector(".shopping-list"); // per la lista shopping
 
+
 // 2. FUNZIONI (la logica - la "ricetta")
 // funzione che aggiunge una task alla todo
 function addToDoTask() {
@@ -40,9 +41,9 @@ function addToDoTask() {
         checkbox.addEventListener('change', function() {
             // id statement usata per far capire se i checkbox sono stati cliccati o meno e hanno il loro stile
             if(checkbox.checked) {
-                newTask.style.textDecoration = "line-through";
+                newTask.classList.add("completed"); // aggiunge lo style della classe .completed CSS
             } else {
-                newTask.style.textDecoration = "none";
+                newTask.classList.remove("completed"); // rimuove lo style della classe .completed CSS
             }
         });
 
@@ -56,19 +57,6 @@ function addToDoTask() {
         todoInputArea.value = ""; // pulisce l'input del box HTML del todo
     } else {
         alert("Non hai scritto nessuna task da completare.")
-    }
-}
-
-// funzione che rimuove il testo dall'input to do list
-function clearTodoInput() {
-    // inizializzazione e accesso all'elemento input HTML per l'input todo
-    const clearTodo = todoInputArea.value;
-
-    // if statement per pulire all'interno dell'input todo
-    if (clearTodo !== "") {
-        todoInputArea.value = "";
-    } else {
-        alert("Non c'è niente da rimuovere nel campo.");
     }
 }
 
@@ -97,9 +85,9 @@ function addShopTask() {
         checkbox.addEventListener('change', function() {
         // id statement usata per far capire se i checkbox sono stati cliccati o meno e hanno il loro stile
         if(checkbox.checked) {
-            newTask.style.textDecoration = "line-through";
+            newShop.classList.add("completed"); // aggiunge lo style della classe .completed CSS
         } else {
-            newTask.style.textDecoration = "none";
+            newShop.classList.remove("completed"); // rimuove lo style della classe .completed CSS
         }
     });
 
@@ -114,6 +102,19 @@ function addShopTask() {
     } else {
         alert("Non hai inserito nessun elemento da dover comprare.")
     };
+}
+
+// funzione che rimuove il testo dall'input to do list
+function clearTodoInput() {
+    // inizializzazione e accesso all'elemento input HTML per l'input todo
+    const clearTodo = todoInputArea.value;
+
+    // if statement per pulire all'interno dell'input todo
+    if (clearTodo !== "") {
+        todoInputArea.value = "";
+    } else {
+        alert("Non c'è niente da rimuovere nel campo.");
+    }
 }
 
 // funzione che rimuove il testo dall'input shopping list
@@ -136,7 +137,9 @@ btnAddTodo.addEventListener('click', addToDoTask);
 // bottone remove per to do list
 btnRemoveTodo.addEventListener('click', clearTodoInput);
 // bottone add per la shop list
-btnAddShop.addEventListener('click', addShopTask); 
+btnAddShop.addEventListener('click', addShopTask);
+// bottone remove per la shop list
+btnRemoveShop.addEventListener('click', clearShopInput);
 
 // metodo addEventListener in modo da rendere Enter (invio) cliccabile per inviare la nuova task todo
 todoInputArea.addEventListener('keydown', (e_add_todo) => {
