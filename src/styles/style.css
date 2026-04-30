@@ -6,6 +6,7 @@
     --border-color: #feef4c;
     --icon-add-color: #2cff05;
     --icon-remove-color: #ef3131;
+    --icon-archive-color: #54e6d4;
     --bg-element-list-even: #fafafa;
     --bg-element-list-odd: #312f2c;
 }
@@ -140,6 +141,7 @@ input[type="text"] {
 .add-todo,
 .add-shop {
     display: flex;
+    align-items: center; /* Allinea icone e testo al centro verticalmente */
     gap: 10px;
     padding: 8px;
     border: 2px solid var(--border-color);
@@ -148,58 +150,80 @@ input[type="text"] {
     margin-top: auto; /* per spostare più in basso di poco il box rispetto alla lista */
 }
 
+/* stile per modificare la lista dell'archivio delle task completate */
+.hidden {
+    display: none;
+}
+
+.completed-list {
+    list-style: none;
+    padding: 0;
+    opacity: 0.7; /* rende le task completate un po' più sbiadite */
+}
+
 /* stile specifici per i button */
 .btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
     outline: none;
+    background: none;
     border: none;
-    border-radius: 5px;
-    flex-grow: 1; /* fa in modo che prenda tutto lo spazio possibile */
     padding: 5px;
+    cursor: pointer;
+    transition: transform 0.2s ease; /* Piccolo feedback di movimento */
 }
 
 /* css specifico per i bottoni (Classi raggruppate) */
 .btn-add,
-.btn-remove {
-    border: none;
-    border-radius: 10px;
+.btn-remove,
+.btn-archive {
     padding: 4px;
-    background: var(--bg-color);
     cursor: pointer;
     /* Spostata qui per funzionare sia in entrata che in uscita */
     transition: all 0.3s ease-in-out; 
+    background: transparent; /* Forza lo sfondo trasparente */
 }
 
-/* Colori specifici per i bottoni ADD */
+/* colori specifici per i bottoni add */
 .btn-add {
     color: var(--icon-add-color);
-    border: 2px var(--icon-add-color) solid;
 }
 
-/* Colori specifici per i bottoni REMOVE */
+/* colori specifici per i bottoni remove */
 .btn-remove {
     color: var(--icon-remove-color);
-    border: 2px var(--icon-remove-color) solid;
-
 }
 
-/* Hover per bottoni ADD */
+/* colori specifici per il bottone del menu di arichivio */
+.btn-archive {
+    color: var(--icon-archive-color);
+    margin: 10px auto; /* Centra il bottone orizzontalmente nel div */
+    width: fit-content; /* Fa sì che il box del bottone sia grande quanto l'icona */
+    display: flex; /* Necessario per il centraggio con margin: auto */
+}
+
+/* hover per bottoni add - solo scala e luminosità, niente background */
 .btn-add:hover {
-    background: var(--icon-add-color);
-    color: var(--bg-color);
+    transform: scale(1.2);
+    filter: brightness(1.5);
 }
 
-/* Hover per bottoni REMOVE */
+/* hover per bottoni remove - solo scala e luminosità, niente background */
 .btn-remove:hover {
-    background: var(--icon-remove-color);
-    color: var(--bg-color);
+    transform: scale(1.2);
+    filter: brightness(1.5);
+}
+
+/* hover per il bottone archive - solo scala e luminosità, niente background */
+.btn-archive:hover {
+    transform: scale(1.2);
+    filter: brightness(1.5);
 }
 
 /* stile per l'icona nel button accanto alla scritta "aggiungi" */
 .bi-plus-circle,
-.bi-x-circle {
-    font-size: 1.2rem; /* Usiamo rem per scalabilità */
+.bi-x-circle,
+.bi-arrow-down-circle {
+    font-size: 1.8rem; /* Aumentato per renderle ben visibili */
 }
