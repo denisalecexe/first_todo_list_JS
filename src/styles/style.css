@@ -2,11 +2,12 @@
 :root {
     --bg-color: #101516;
     --container-bg: #2a323f;
-    --text-color: #54e6d4;
+    --text-color: #01de82;
     --border-color: #feef4c;
     --icon-add-color: #2cff05;
     --icon-remove-color: #ef3131;
-    --bg-button-hover: #4144f3;
+    --bg-element-list-even: #fafafa;
+    --bg-element-list-odd: #312f2c;
 }
 
 /* UNIVERSAL TAG */
@@ -53,34 +54,6 @@ input[type="text"] {
     background-color: var(--bg-color);
 }
 
-/* stile per gli li item */
-.todo-list li,
-.shopping-list li {
-    list-style: none; /* questo fa in modo di non mostrare il punto della lista non puntata */
-    font-size: 16px; /* questo va ad ingrandire tutto, sia testo che checkbox*/
-    margin-bottom: 8px; /* questo fa in modo di distanziare le task tra di loro */
-}
-
-/* stile per il checkbox */
-.todo-list li input[type="checkbox"],
-.shopping-list li input[type="checkbox"] {
-    transform: scale(1.5); /* Ingrandisce il quadrato del check per matchare il testo */
-    margin-right: 10px;    /* Spazio tra un check ed il testo */
-    vertical-align: middle; /* questo Li tiene sulla stessa linea senza Flex */
-}
-
-/* stile sia per li che per lo span */
-.todo-list li span,
-.shopping-list li span {
-    vertical-align: middle;
-}
-
-/* stile per qiando la task viene completata e gestito da javascript */
-.completed {
-    text-decoration: line-through;
-    opacity: 0.6;
-}
-
 /* per i bordi dei div figli di container */
 .todo,
 .shopping {
@@ -97,6 +70,70 @@ input[type="text"] {
     border-radius: 15px; /* Arrotondato per estetica */
 }
 
+/* stile per i titoli */
+.title {
+    text-align: center;
+    font-size: 35px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin-bottom: 15px;
+}
+
+/* stile per gli ul della todo e shopping list in modo che la riga prenda tutto lo spazio del contenitore */
+.todo-list,
+.shopping-list {
+    margin: 15px 0;
+    padding: 2px 0;
+}
+
+/* stile per il checkbox */
+.todo-list li input[type="checkbox"],
+.shopping-list li input[type="checkbox"] {
+    transform: scale(1.5); /* Ingrandisce il quadrato del check per matchare il testo */
+    margin-right: 10px;    /* Spazio tra un check ed il testo */
+    vertical-align: middle; /* questo Li tiene sulla stessa linea senza Flex */
+}
+
+/* stile per gli li item */
+.todo-list li,
+.shopping-list li {
+    list-style: none; /* questo fa in modo di non mostrare il punto della lista non puntata */
+    font-size: 16px; /* questo va ad ingrandire tutto, sia testo che checkbox*/
+    padding: 15px;
+}
+
+/* l'aggiunta della pseudo classe :nth-child() agli li della todo e shopping list fa in modo di modificare lo sfondo */
+/* even = pari */
+.todo-list li:nth-child(even),
+.shopping-list li:nth-child(even) {
+    background-color: var(--bg-element-list-even);
+    border-radius: 10px;
+}
+
+/* odd = dispari */
+.todo-list li:nth-child(odd),
+.shopping-list li:nth-child(odd) {
+    background-color: var(--bg-element-list-odd);
+}
+
+.todo-list li:nth-child(even),
+.shopping-list li:nth-child(even),
+.todo-list li:nth-child(odd),
+.shopping-list li:nth-child(odd) {
+    border-radius: 5px;
+}
+
+/* stile sia per li che per lo span */
+.todo-list li span,
+.shopping-list li span {
+    vertical-align: middle;
+}
+
+/* stile per qiando la task viene completata e gestito da javascript */
+.completed {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
 /* modifica riguardo il container dell'input dove scrivere le to do e il bottone */
 /* fa anche in modo di sembrare che il button sia all'interno dell'input, ma in realtà sono due elementi diversi e distinti */
 /* questa classe è il contenitore che racchiude input text e button */
@@ -109,18 +146,6 @@ input[type="text"] {
     border-radius: 10px;
     background: var(--bg-color);
     margin-top: auto; /* per spostare più in basso di poco il box rispetto alla lista */
-    /* display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column; */
-}
-
-/* stile per i titoli */
-.title {
-    text-align: center;
-    font-size: 35px;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    margin-bottom: 15px;
 }
 
 /* stile specifici per i button */
