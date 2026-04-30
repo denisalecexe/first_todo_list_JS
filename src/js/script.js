@@ -14,6 +14,54 @@ const btnRemoveShop = document.getElementById("btn-remove-shop"); // per il tast
 const todoList = document.querySelector(".todo-list"); // per la lista to do
 const shopList = document.querySelector(".shopping-list"); // per la lista shopping
 
+// array che che conterrà ke task nella memoria grazie al localStorage
+let permanentTask = [];
+let savedData = localStorage.getItem("tasks");
+// recupera i dati salvati e li traforma da stringa ad array e se il magazzino è vuoto, inizializza un array vuoto
+permanentTask = JSON.parse(savedData) || [];
+console.log("Test: ", savedData); // mostra nella console i dati salvati nelle task
+
+// ciclo forEach che mantiene la memoria della lista anche al ricaricamento della pagina
+permanentTask.forEach(task => {
+    // CREARE GLI ELEMENTI
+    // crea gli li
+    const li = document.createElement("li");
+    // creare il checkbox
+    const check = document.createElement("input");
+    check.type = "checkbox";
+    // creare lo span
+    const span = document.createElement("span");
+
+    // ASSEGNARE I VALORI
+    span.innerText = task.testo; // questo prende il testo dell'oggetto salvato
+
+    // AGGIUNGE LO STILE SE LA TASK ERA COMPLETATA
+    if(task.completata) {
+        li.classList.add("completed");
+        check.checked = true;
+    }
+
+    // stessa addEventListener sul checkbox che si trova nelle funzioni add per far continuare a render il checkbox interattivo
+    check.addEventListener('change', function() {
+        if(check.checked) {
+            li.classList.add("completed"); 
+        } else {
+            li.classList.remove("completed");
+        }
+    });
+
+    // ASSEMBLA IL TASK
+    li.appendChild(check);
+    li.appendChild(span);
+
+    // DIREZIONA IL TASK IN TODO LISTO O SHOPPING LIST
+    if (task.categoria === "todo") {
+        todoList.appendChild(li);
+    } else {
+        shopList.appendChild(li);
+    }
+});
+
 
 // 2. FUNZIONI (la logica - la "ricetta")
 // funzione che aggiunge una task alla todo
@@ -54,9 +102,20 @@ function addToDoTask() {
 
         // 4. PUBBLICAZIONE
         todoInputArea.value = ""; // pulisce l'input del box HTML del todo
+        
+        // 5. MEMORIZZARE I DATI
+        // oggetto che poi verrà inserito nell'aray permanentTask
+        const newTodoTaskObj = {
+            testo: todoArea,
+            categoria: "todo",
+            completata: false,
+        };
+
+        permanentTask.push(newTodoTaskObj);
+        localStorage.setItem("tasks", JSON.stringify(permanentTask));
     } else {
         alert("Non hai scritto nessuna task da completare.")
-    }
+    } 
 }
 
 // funzione che aggiunge una stask alla shopping list
@@ -96,7 +155,18 @@ function addShopTask() {
         shopList.appendChild(newShop); // mostra nella lista il nuovo elemento in shop
 
         // 4. PUBBLICAZIONE
-        shopInputArea.value = ""; // pulisce l'input del box HTML del todo
+        shopInputArea.value = ""; // pulisce l'input del box HTML dello shopping
+        
+        // 5. MEMORIZZARE I DATI
+        // oggetto che poi verrà inserito nell'aray permanentTask
+        const newShopTaskObj = {
+            testo: shopArea,
+            categoria: "shopping",
+            completata: false,
+        };
+
+        permanentTask.push(newShopTaskObj);
+        localStorage.setItem("tasks", JSON.stringify(permanentTask));
     } else {
         alert("Non hai inserito nessun elemento da dover comprare.")
     };
@@ -167,7 +237,7 @@ shopInputArea.addEventListener('keydown', (e_clear_shop) => {
     if (e_clear_shop.key === "Escape") {
         clearShopInput();
     }
-})
+});
 
 // 5. TEST PER VEDERE SE IL FOGLIO "SCRIPT.JS" FUNZIONA
 console.log("test veloce");
