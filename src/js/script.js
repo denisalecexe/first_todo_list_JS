@@ -53,7 +53,6 @@ function addToDoTask() {
         todoList.appendChild(newTask); // mostra nella lista il nuovo elemento in todo
 
         // 4. PUBBLICAZIONE
-        todoList.appendChild(newTask); 
         todoInputArea.value = ""; // pulisce l'input del box HTML del todo
     } else {
         alert("Non hai scritto nessuna task da completare.")
@@ -97,7 +96,6 @@ function addShopTask() {
         shopList.appendChild(newShop); // mostra nella lista il nuovo elemento in shop
 
         // 4. PUBBLICAZIONE
-        shopList.appendChild(newShop); 
         shopInputArea.value = ""; // pulisce l'input del box HTML del todo
     } else {
         alert("Non hai inserito nessun elemento da dover comprare.")
