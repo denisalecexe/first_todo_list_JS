@@ -129,7 +129,7 @@ input[type="text"] {
     vertical-align: middle;
 }
 
-/* stile per qiando la task viene completata e gestito da javascript */
+/* stile da usare nel js quando la task viene completata e gestito da javascript */
 .completed {
     text-decoration: line-through;
     opacity: 0.6;
@@ -201,6 +201,11 @@ input[type="text"] {
     margin: 10px auto; /* Centra il bottone orizzontalmente nel div */
     width: fit-content; /* Fa sì che il box del bottone sia grande quanto l'icona */
     display: flex; /* Necessario per il centraggio con margin: auto */
+}
+
+/* stile che viene usato nel js per far si che il bottone della freccia del menu ruoti verso l'alto */
+.rotated {
+    transform: rotate(180deg);
 }
 
 /* hover per bottoni add - solo scala e luminosità, niente background */
