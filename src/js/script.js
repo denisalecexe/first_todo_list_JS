@@ -14,6 +14,14 @@ const btnRemoveShop = document.getElementById("btn-remove-shop"); // per il tast
 const todoList = document.querySelector(".todo-list"); // per la lista to do
 const shopList = document.querySelector(".shopping-list"); // per la lista shopping
 
+// variabili per i bottoni del dropdown
+// zona TODO
+const iconTodo = document.querySelector(".arrow-menu-todo");
+const dropdownTodo = document.getElementById("btn-toggle-todo");
+// zona SHOP
+const iconShop = document.querySelector(".arrow-menu-shop");
+const dropdownShop = document.getElementById("btn-toggle-shop");
+
 // array che che conterrà ke task nella memoria grazie al localStorage
 let permanentTask = [];
 let savedData = localStorage.getItem("tasks");
@@ -61,7 +69,6 @@ permanentTask.forEach(task => {
         shopList.appendChild(li);
     }
 });
-
 
 // 2. FUNZIONI (la logica - la "ricetta")
 // funzione che aggiunge una task alla todo
@@ -237,7 +244,16 @@ shopInputArea.addEventListener('keydown', (e_clear_shop) => {
     if (e_clear_shop.key === "Escape") {
         clearShopInput();
     }
-});
+})
+
+// eventi per rendere dinamici i bottoni dei menu di todo list e shopping list delle task completate
+dropdownTodo.addEventListener('click', function() {
+    iconTodo.classList.toggle("rotated");
+})
+
+dropdownShop.addEventListener('click', function() {
+    iconShop.classList.toggle("rotated");
+})
 
 // 5. TEST PER VEDERE SE IL FOGLIO "SCRIPT.JS" FUNZIONA
 console.log("test veloce");
