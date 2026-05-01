@@ -9,6 +9,7 @@
     --icon-archive-color: #54e6d4;
     --bg-element-list-even: #fafafa;
     --bg-element-list-odd: #312f2c;
+    --bg-completed-task: #2b2b2bcc;
 }
 
 /* UNIVERSAL TAG */
@@ -51,7 +52,7 @@ input[type="text"] {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column; /* mette in colonna gli elementi */
+    flex-direction: row; /* mette in riga gli elementi */
     background-color: var(--bg-color);
 }
 
@@ -66,7 +67,7 @@ input[type="text"] {
     max-width: 500px; /* limite massimo */
     min-height: 250px;
     height: auto; /* questo permette di far crescere il contenitore senza che esso si rompa */
-    margin: 15px 0;
+    margin: 0 15px;
     padding: 10px;
     border-radius: 15px; /* Arrotondato per estetica */
 }
@@ -151,14 +152,18 @@ input[type="text"] {
 }
 
 /* stile per modificare la lista dell'archivio delle task completate */
-.hidden {
-    display: none;
+.show {
+    max-height: 500px;
+    background: var(--bg-completed-task);
 }
 
 .completed-list {
+    max-height: 0;
     list-style: none;
+    overflow: hidden;
     padding: 0;
-    opacity: 0.7; /* rende le task completate un po' più sbiadite */
+    opacity: 0;
+    transition: all 0.4s ease-in-out;
 }
 
 /* stile specifici per i button */
