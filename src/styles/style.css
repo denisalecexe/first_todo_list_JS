@@ -32,7 +32,6 @@ input[type="text"] {
     padding: 3px;
 }
 
-
 /* ID */
 #todo-input-area,
 #shop-input-area {
@@ -59,6 +58,7 @@ input[type="text"] {
 /* per i bordi dei div figli di container */
 .todo,
 .shopping {
+    position: relative; /* AGGIUNTO QUI: fondamentale per contenere la lista absolute */
     display: flex;
     flex-direction: column;
     background-color: var(--container-bg);
@@ -153,20 +153,45 @@ input[type="text"] {
 
 /* stile per modificare la lista dell'archivio delle task completate */
 .show {
-    max-height: 500px;
-    background: var(--bg-completed-task);
-    opacity: 1;
+    max-height: 450px !important; /* forza l'altezza */
+    min-height: 100px;           /* fondamentale per vederla se è vuota */
+    opacity: 1 !important;
+    pointer-events: auto !important; /* CORRETTO: permette i click quando è aperta */
     padding: 10px;    /* crea uno spazio interno */
-    margin: 10px; /* stacca la lista dal bordo */
+    border: 2px solid var(--border-color); /* aggiunto per dare visibilità alla finestra fluttuante */
 }
 
 .completed-list {
+    position: absolute; /* rende la lista delle task completate fluttuante */
+    z-index: 9999; /* la mette "al di sopra" di tutto il resto */
     max-height: 0;
     list-style: none;
     overflow: hidden;
+    /* le istruzioni left e transform fanno centrare perfettamente la lista */
+    bottom: 60px; /* SPOSTATO: usa bottom per farla apparire sopra i tasti di input */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%; /* larghezza quasi totale del contenitore */
     padding: 0;
     opacity: 0;
+    pointer-events: none; /* CORRETTO: la ignora quando è chiusa */
+    background: var(--bg-completed-task);
+    backdrop-filter: blur(5px); /* sfoca quello che c'è sotto */
     transition: all 0.4s ease-in-out;
+    border-radius: 10px;
+}
+
+/* nasconde il messaggio se c'è almeno un elemento li nella lista */
+.completed-list:has(li) .empty-msg {
+    display: none;
+}
+
+.empty-msg {
+    text-align: center;
+    font-style: italic;
+    opacity: 0.7;
+    padding: 10px;
+    color: var(--text-color);
 }
 
 /* stile specifici per i button */
