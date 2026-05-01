@@ -155,6 +155,9 @@ input[type="text"] {
 .show {
     max-height: 500px;
     background: var(--bg-completed-task);
+    opacity: 1;
+    padding: 10px;    /* crea uno spazio interno */
+    margin: 10px; /* stacca la lista dal bordo */
 }
 
 .completed-list {
@@ -240,5 +243,5 @@ input[type="text"] {
 
 /* stile specifico solo per l'icona della freccia del dropdown che serve a farla roteare */
 .bi-arrow-down-circle {
-    transition: transform 0.3 ease-in-out;
+    transition: transform 0.3s ease-in-out;
 }

@@ -17,10 +17,12 @@ const shopList = document.querySelector(".shopping-list"); // per la lista shopp
 // variabili per i bottoni del dropdown
 // zona TODO
 const iconTodo = document.querySelector(".arrow-menu-todo");
-const dropdownTodo = document.getElementById("btn-toggle-todo");
+const dropdownTodo = document.getElementById("btn-toggle-todo"); // il "boss" che fa girare la freccia
+const listTodo = document.getElementsByClassName("completed-list")[0]; // il contenuto che deve far apparire la lista
 // zona SHOP
 const iconShop = document.querySelector(".arrow-menu-shop");
-const dropdownShop = document.getElementById("btn-toggle-shop");
+const dropdownShop = document.getElementById("btn-toggle-shop");//il "boss" che fa girare la freccia
+const listShop = document.getElementsByClassName("completed-list")[1];  // il contenuto che far deve apparire la lista
 
 // array che che conterrà ke task nella memoria grazie al localStorage
 let permanentTask = [];
@@ -248,11 +250,13 @@ shopInputArea.addEventListener('keydown', (e_clear_shop) => {
 
 // eventi per rendere dinamici i bottoni dei menu di todo list e shopping list delle task completate
 dropdownTodo.addEventListener('click', function() {
-    iconTodo.classList.toggle("rotated");
+    iconTodo.classList.toggle("rotated"); // fa ruotare la freccia
+    listTodo.classList.toggle("show"); // mostra la lista delle task completate
 })
 
 dropdownShop.addEventListener('click', function() {
-    iconShop.classList.toggle("rotated");
+    iconShop.classList.toggle("rotated"); // fa ruotare la freccia
+    listShop.classList.toggle("show"); // mostra la lista delle task completate
 })
 
 // 5. TEST PER VEDERE SE IL FOGLIO "SCRIPT.JS" FUNZIONA
