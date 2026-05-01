@@ -232,3 +232,8 @@ input[type="text"] {
 .bi-arrow-down-circle {
     font-size: 1.8rem; /* Aumentato per renderle ben visibili */
 }
+
+/* stile specifico solo per l'icona della freccia del dropdown che serve a farla roteare */
+.bi-arrow-down-circle {
+    transition: transform 0.3 ease-in-out;
+}
