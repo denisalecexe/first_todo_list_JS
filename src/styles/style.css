@@ -243,19 +243,16 @@ input[type="text"] {
 
 /* hover per bottoni add - solo scala e luminosità, niente background */
 .btn-add:hover {
-    transform: scale(1.2);
     filter: brightness(1.5);
 }
 
 /* hover per bottoni remove - solo scala e luminosità, niente background */
 .btn-remove:hover {
-    transform: scale(1.2);
     filter: brightness(1.5);
 }
 
 /* hover per il bottone archive - solo scala e luminosità, niente background */
 .btn-archive:hover {
-    transform: scale(1.2);
     filter: brightness(1.5);
 }
 
