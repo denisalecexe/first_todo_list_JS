@@ -2,14 +2,16 @@
 :root {
     --bg-color: #101516;
     --container-bg: #2a323f;
-    --text-color: #01de82;
+    --header-color: #01de82;
+    --text-color: #05614b;
+    --text-input-color: #01de82;
     --border-color: #feef4c;
     --icon-add-color: #2cff05;
     --icon-remove-color: #ef3131;
     --icon-archive-color: #54e6d4;
-    --bg-element-list-even: #fafafa;
-    --bg-element-list-odd: #312f2c;
-    --bg-completed-task: #2b2b2bcc;
+    --bg-element-list-even: #aaa;
+    --bg-element-list-odd: #ccc;
+    --bg-completed-task: #0a0a0a80;
 }
 
 /* UNIVERSAL TAG */
@@ -22,12 +24,10 @@
 /* TAG ELEMENT */
 body {
     margin: 0;
-    color: var(--text-color);
     background-color: var(--bg-color); /* Aggiunto qui per pulizia */
 }
 
 input[type="text"] {
-    color: var(--text-color);
     font-size: 16px;
     padding: 3px;
 }
@@ -40,7 +40,7 @@ input[type="text"] {
     border-radius: 5px;
     flex-grow: 1; /* fa in modo che prenda tutto lo spazio possibile, lasciando lo spazio necessatio al bottone */
     background: transparent; /* Per farlo integrare meglio nel box .add-todo */
-    color: white;
+    color: var(--text-input-color);
     padding: 5px;
     width: 80%;
 }
@@ -74,6 +74,7 @@ input[type="text"] {
 
 /* stile per i titoli */
 .title {
+    color: var(--header-color);
     text-align: center;
     font-size: 35px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -89,7 +90,8 @@ input[type="text"] {
 
 /* stile per il checkbox */
 .todo-list li input[type="checkbox"],
-.shopping-list li input[type="checkbox"] {
+.shopping-list li input[type="checkbox"],
+.completed-list li input[type="checkbox"] {
     transform: scale(1.5); /* Ingrandisce il quadrato del check per matchare il testo */
     margin-right: 10px;    /* Spazio tra un check ed il testo */
     vertical-align: middle; /* questo Li tiene sulla stessa linea senza Flex */
@@ -97,37 +99,44 @@ input[type="text"] {
 
 /* stile per gli li item */
 .todo-list li,
-.shopping-list li {
+.shopping-list li,
+.completed-list li{
     list-style: none; /* questo fa in modo di non mostrare il punto della lista non puntata */
     font-size: 16px; /* questo va ad ingrandire tutto, sia testo che checkbox*/
     padding: 15px;
+    margin: 5px;
 }
 
 /* l'aggiunta della pseudo classe :nth-child() agli li della todo e shopping list fa in modo di modificare lo sfondo */
 /* even = pari */
 .todo-list li:nth-child(even),
-.shopping-list li:nth-child(even) {
+.shopping-list li:nth-child(even),
+.completed-list li:nth-child(even) {
     background-color: var(--bg-element-list-even);
     border-radius: 10px;
 }
 
 /* odd = dispari */
 .todo-list li:nth-child(odd),
-.shopping-list li:nth-child(odd) {
+.shopping-list li:nth-child(odd),
+.completed-list li:nth-child(odd) {
     background-color: var(--bg-element-list-odd);
 }
 
 .todo-list li:nth-child(even),
 .shopping-list li:nth-child(even),
 .todo-list li:nth-child(odd),
-.shopping-list li:nth-child(odd) {
+.shopping-list li:nth-child(odd),
+.completed-list li:nth-child(odd) {
     border-radius: 5px;
 }
 
 /* stile sia per li che per lo span */
 .todo-list li span,
-.shopping-list li span {
+.shopping-list li span,
+.completed-list li span {
     vertical-align: middle;
+    color: var(--text-color);
 }
 
 /* stile da usare nel js quando la task viene completata e gestito da javascript */
