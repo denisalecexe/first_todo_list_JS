@@ -99,8 +99,18 @@ function addToDoTask() {
             // id statement usata per far capire se i checkbox sono stati cliccati o meno e hanno il loro stile
             if(checkbox.checked) {
                 newTask.classList.add("completed"); // aggiunge lo style della classe .completed CSS
+
+                /* aspettare almeno 300ms (il tempo di un'animazione CSS) prima di spostarlo 
+                e setTimeout fa proprio questo */
+                setTimeout(() => {
+                    // lo sposta nella lista delle task completate (listTodo)
+                    listTodo.appendChild(newTask);
+                }, 300);
             } else {
                 newTask.classList.remove("completed"); // rimuove lo style della classe .completed CSS
+
+                // questo farà in modo che se si deseleziona la task, la si riporta nella lista principale
+                todoList.appendChild(newTask);
             }
         });
 
@@ -150,13 +160,23 @@ function addShopTask() {
 
         // funzione per migliorare e decorare il checkbox in shop
         checkbox.addEventListener('change', function() {
-        // id statement usata per far capire se i checkbox sono stati cliccati o meno e hanno il loro stile
-        if(checkbox.checked) {
-            newShop.classList.add("completed"); // aggiunge lo style della classe .completed CSS
-        } else {
-            newShop.classList.remove("completed"); // rimuove lo style della classe .completed CSS
-        }
-    });
+            // id statement usata per far capire se i checkbox sono stati cliccati o meno e hanno il loro stile
+            if(checkbox.checked) {
+                newShop.classList.add("completed"); // aggiunge lo style della classe .completed CSS
+
+                /* aspettare almeno 300ms (il tempo di un'animazione CSS) prima di spostarlo 
+                e setTimeout fa proprio questo */
+                setTimeout(() => {
+                    // lo sposta nella lista delle task completate dello shopping (listShop)
+                    listShop.appendChild(newShop);
+                }, 300);
+            } else {
+                newShop.classList.remove("completed"); // rimuove lo style della classe .completed CSS
+
+                // questo farà in modo che se si deseleziona la task, la si riporta nella lista principale
+                shopList.appendChild(newShop);
+            }
+        });
 
         // 3. ASSEMBLAGGIO (Prima i pezzi piccoli, poi il pezzo grosso nel DOM)
         newShop.appendChild(checkbox); // mostra il checkbox shop
