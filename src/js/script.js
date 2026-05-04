@@ -269,17 +269,20 @@ shopInputArea.addEventListener('keydown', (e_clear_shop) => {
 })
 
 // eventi per rendere dinamici i bottoni dei menu di todo list e shopping list delle task completate
+// TODO
 dropdownTodo.addEventListener('click', function() {
     iconTodo.classList.toggle("rotated"); // fa ruotare la freccia
     listTodo.classList.toggle("show"); // mostra la lista delle task completate
 })
 
+// SHOP
 dropdownShop.addEventListener('click', function() {
     iconShop.classList.toggle("rotated"); // fa ruotare la freccia
     listShop.classList.toggle("show"); // mostra la lista delle task completate
 })
 
 // evento che fa si che anche se si clicca al di fuori del menu della lista delle task completate, esssa si chiude comunque
+/* TODO */
 document.addEventListener('click', (event) => {
     console.log("Hai cliccato su: ", event.target);
 
@@ -288,6 +291,17 @@ document.addEventListener('click', (event) => {
         iconTodo.classList.remove("rotated");
     }
 })
+
+// SHOP
+document.addEventListener('click', (event) => {
+    console.log("Hai cliccato su: ", event.target);
+
+    if (!listShop.contains(event.target) && !dropdownShop.contains(event.target)) {
+        listShop.classList.remove("show");
+        iconShop.classList.remove("rotated");
+    }
+})
+
 
 // 5. TEST PER VEDERE SE IL FOGLIO "SCRIPT.JS" FUNZIONA
 console.log("test veloce");
