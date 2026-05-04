@@ -279,5 +279,15 @@ dropdownShop.addEventListener('click', function() {
     listShop.classList.toggle("show"); // mostra la lista delle task completate
 })
 
+// evento che fa si che anche se si clicca al di fuori del menu della lista delle task completate, esssa si chiude comunque
+document.addEventListener('click', (event) => {
+    console.log("Hai cliccato su: ", event.target);
+
+    if (!listTodo.contains(event.target) && !dropdownTodo.contains(event.target)) {
+        listTodo.classList.remove("show");
+        iconTodo.classList.remove("rotated");
+    }
+})
+
 // 5. TEST PER VEDERE SE IL FOGLIO "SCRIPT.JS" FUNZIONA
 console.log("test veloce");
