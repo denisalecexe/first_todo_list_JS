@@ -8,6 +8,7 @@
     --border-color: #feef4c;
     --icon-add-color: #2cff05;
     --icon-remove-color: #ef3131;
+    --icon-edit-color: #ff1e9d;
     --icon-archive-color: #54e6d4;
     --bg-element-list-even: #aaa;
     --bg-element-list-odd: #ccc;
@@ -94,7 +95,6 @@ input[type="text"] {
 .completed-list li input[type="checkbox"] {
     transform: scale(1.5); /* Ingrandisce il quadrato del check per matchare il testo */
     margin-right: 10px;    /* Spazio tra un check ed il testo */
-    vertical-align: middle; /* questo Li tiene sulla stessa linea senza Flex */
 }
 
 /* stile per gli li item */
@@ -105,6 +105,10 @@ input[type="text"] {
     font-size: 16px; /* questo va ad ingrandire tutto, sia testo che checkbox*/
     padding: 15px;
     margin: 5px;
+    /* li rende allineati sia verticalmente che orizzontalmente */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 /* l'aggiunta della pseudo classe :nth-child() agli li della todo e shopping list fa in modo di modificare lo sfondo */
@@ -135,7 +139,6 @@ input[type="text"] {
 .todo-list li span,
 .shopping-list li span,
 .completed-list li span {
-    vertical-align: middle;
     color: var(--text-color);
 }
 
@@ -220,12 +223,24 @@ input[type="text"] {
 /* css specifico per i bottoni (Classi raggruppate) */
 .btn-add,
 .btn-remove,
+.btn-delete,
+.btn-edit,
 .btn-archive {
     padding: 4px;
     cursor: pointer;
     /* Spostata qui per funzionare sia in entrata che in uscita */
     transition: all 0.3s ease-in-out; 
     background: transparent; /* Forza lo sfondo trasparente */
+}
+
+.btn-archive {
+    outline: none;
+    background: none;
+    border: none;
+    margin: 0 auto;
+    padding: 5px;
+    cursor: pointer;
+    transition: transform 0.2s ease; /* Piccolo feedback di movimento */
 }
 
 /* colori specifici per i bottoni add */
@@ -236,6 +251,25 @@ input[type="text"] {
 /* colori specifici per i bottoni remove */
 .btn-remove {
     color: var(--icon-remove-color);
+}
+
+/* grandezze per delete ed edit */
+.btn-delete,
+.btn-edit {
+    font-size: 1.5rem; /* ingrandisce l'icona */
+}
+
+/* colori specifici per il bottone trash vicino al checkbox */
+.btn-delete {
+    color: var(--icon-remove-color);
+    margin-right: 15px; /* Spazio tra cestino e checkbox */
+}
+
+/* colori specifici per il bottone di edit */
+.btn-edit {
+    color: var(--icon-edit-color);
+    margin-left: auto; /* spinge l'icona tutto a destra */
+    padding: 0 10px;
 }
 
 /* colori specifici per il bottone del menu di arichivio */
@@ -251,17 +285,29 @@ input[type="text"] {
     transform: rotate(180deg);
 }
 
-/* hover per bottoni add - solo scala e luminosità, niente background */
+/* hover per bottoni add, solo luminosità, niente background */
 .btn-add:hover {
     filter: brightness(1.5);
 }
 
-/* hover per bottoni remove - solo scala e luminosità, niente background */
+/* hover per bottoni remove, solo luminosità, niente background */
 .btn-remove:hover {
     filter: brightness(1.5);
 }
 
-/* hover per il bottone archive - solo scala e luminosità, niente background */
+/* hover per bottoni delete, luminosità e background */
+.btn-delete:hover {
+    filter: brightness(1.5);
+    filter: drop-shadow(3px 1px 2px var(--bg-color));
+}
+
+/* hover per bottoni edit, luminosità e background */
+.btn-edit:hover {
+    filter: brightness(1.5);
+    filter: drop-shadow(3px 1px 2px var(--container-bg));
+}
+
+/* hover per bottoni archive, solo luminosità, niente background */
 .btn-archive:hover {
     filter: brightness(1.5);
 }
@@ -276,4 +322,18 @@ input[type="text"] {
 /* stile specifico solo per l'icona della freccia del dropdown che serve a farla roteare */
 .bi-arrow-down-circle {
     transition: transform 0.3s ease-in-out;
+}
+
+/* --- MEDIA QUERY PER RESPONSIVE WEB DESIGN --- */
+/* Questa regola dice: se lo schermo è sotto i 850px, metti le liste in colonna */
+@media screen and (max-width: 850px) {
+    .container {
+        flex-direction: column;
+        padding-top: 50px; /* Un po' di spazio sopra per non toccare il bordo */
+    }
+
+    .todo,
+    .shopping {
+        margin: 15px 0; /* Margine sopra e sotto invece che ai lati */
+    }
 }

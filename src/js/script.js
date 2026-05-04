@@ -83,16 +83,24 @@ function addToDoTask() {
         // 1. CREAZIONE ELEMENTI
         // crea un nuovo elemento li
         const newTask = document.createElement("li");
+        // crea l'icona per il trash
+        const iconTrash = document.createElement("i");
         // crea il checkbox
         const checkbox = document.createElement("input");
         // crea lo span per il testo della nuova task ed è l'etichetta
         const taskText = document.createElement("span");
+        // crea l'icona di edit
+        const editTask = document.createElement("i");
         
         // 2. CONFIGURAZIONE CHECKBOX E TESTO
+        // serve per il browser per l'icona del trash
+        iconTrash.classList.add("bi", "bi-trash-fill", "btn-delete");
         // serve per il browser a definire l'identità dell'elemento
         checkbox.type = "checkbox";
         // questo mette il testo nell'etichetta
         taskText.innerText = todoArea;
+        // serve per il browser per l'icona dell'edit
+        editTask.classList.add("bi", "bi-pencil-square", "btn-edit");
 
         // funzione per migliorare e decorare il checkbox in todo
         checkbox.addEventListener('change', function() {
@@ -115,8 +123,10 @@ function addToDoTask() {
         });
 
         // 3. ASSEMBLAGGIO (Prima i pezzi piccoli, poi il pezzo grosso nel DOM)
+        newTask.appendChild(iconTrash); // mostra l'icona del trash vicino al checkbox
         newTask.appendChild(checkbox); // mostra il checkbox todo
         newTask.appendChild(taskText); // si aggiunge l'etichetta all'elemento li in todo
+        newTask.appendChild(editTask); // mostra nella lista l'icona per modificare la task
         todoList.appendChild(newTask); // mostra nella lista il nuovo elemento in todo
 
         // 4. PUBBLICAZIONE
@@ -147,16 +157,25 @@ function addShopTask() {
         // 1. CREAZIONE ELEMENTI
         // crea un nuovo elemento li
         const newShop = document.createElement("li");
+        // crea l'icona per il trash
+        const iconTrash = document.createElement("i");
         // crea il checkbox
         const checkbox = document.createElement("input");
         // crea lo span per il testo della nuova task ed è l'etichetta
         const shopText = document.createElement("span");
+        // crea l'icona di edit
+        const editTask = document.createElement("i");
 
         // 2. CONFIGURAZIONE CHECKBOX E TESTO
+        // serve per il browser per l'icona del trash
+        iconTrash.classList.add("bi", "bi-trash-fill", "btn-delete");
         // serve per il browser a definire l'identità dell'elemento
         checkbox.type = "checkbox";
         // questo mette il testo nell'etichetta
         shopText.innerText = shopArea;
+        
+        // serve per il browser per l'icona dell'edit
+        editTask.classList.add("bi", "bi-pencil-square", "btn-edit");
 
         // funzione per migliorare e decorare il checkbox in shop
         checkbox.addEventListener('change', function() {
@@ -179,9 +198,12 @@ function addShopTask() {
         });
 
         // 3. ASSEMBLAGGIO (Prima i pezzi piccoli, poi il pezzo grosso nel DOM)
+        newShop.appendChild(iconTrash); // mostra l'icona del trash vicino al checkbox
         newShop.appendChild(checkbox); // mostra il checkbox shop
         newShop.appendChild(shopText); // si aggiunge l'etichetta all'elemento li in shop
+        newShop.appendChild(editTask); // mostra nella lista l'icona per modificare la task
         shopList.appendChild(newShop); // mostra nella lista il nuovo elemento in shop
+
 
         // 4. PUBBLICAZIONE
         shopInputArea.value = ""; // pulisce l'input del box HTML dello shopping
@@ -269,7 +291,7 @@ shopInputArea.addEventListener('keydown', (e_clear_shop) => {
 })
 
 // eventi per rendere dinamici i bottoni dei menu di todo list e shopping list delle task completate
-// TODO
+/* TODO */
 dropdownTodo.addEventListener('click', function() {
     iconTodo.classList.toggle("rotated"); // fa ruotare la freccia
     listTodo.classList.toggle("show"); // mostra la lista delle task completate
@@ -284,18 +306,14 @@ dropdownShop.addEventListener('click', function() {
 // evento che fa si che anche se si clicca al di fuori del menu della lista delle task completate, esssa si chiude comunque
 /* TODO */
 document.addEventListener('click', (event) => {
-    console.log("Hai cliccato su: ", event.target);
-
     if (!listTodo.contains(event.target) && !dropdownTodo.contains(event.target)) {
         listTodo.classList.remove("show");
         iconTodo.classList.remove("rotated");
     }
 })
 
-// SHOP
+/* SHOP */
 document.addEventListener('click', (event) => {
-    console.log("Hai cliccato su: ", event.target);
-
     if (!listShop.contains(event.target) && !dropdownShop.contains(event.target)) {
         listShop.classList.remove("show");
         iconShop.classList.remove("rotated");
