@@ -26,6 +26,7 @@
 body {
     margin: 0;
     background-color: var(--bg-color); /* Aggiunto qui per pulizia */
+    overflow: hidden; /* impedisce la comparsa della scrollbar nell'intera pagina */
 }
 
 input[type="text"] {
@@ -49,13 +50,13 @@ input[type="text"] {
 /* CLASS */
 .container {
     min-height: 100vh; /* questo è quello che farebbe apportare la magia! */
+    max-height: 100vh; /* forza il contenitore a non superare l'altezza dello schermo */
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: row; /* mette in riga gli elementi */
     background-color: var(--bg-color);
 }
-
 /* per i bordi dei div figli di container */
 .todo,
 .shopping {
@@ -87,6 +88,9 @@ input[type="text"] {
 .shopping-list {
     margin: 15px 0;
     padding: 2px 0;
+    /* scroll bar per le liste delle task */
+    max-height: 150px;
+    overflow-y: auto;
 }
 
 /* stile per il checkbox */
@@ -165,20 +169,22 @@ input[type="text"] {
 
 /* stile per modificare la lista dell'archivio delle task completate */
 .show {
-    max-height: 450px !important; /* forza l'altezza */
-    min-height: 100px;           /* fondamentale per vederla se è vuota */
+    max-height: 400px !important; /* forza l'altezza */
+    min-height: 150px;           /* fondamentale per vederla se è vuota */
+    /* scrall bar per le liste completate */
+    overflow-y: auto;
     opacity: 1 !important;
-    pointer-events: auto !important; /* CORRETTO: permette i click quando è aperta */
+    pointer-events: auto !important; /* permette i click quando è aperta */
     padding: 10px;    /* crea uno spazio interno */
     border: 2px solid var(--border-color); /* aggiunto per dare visibilità alla finestra fluttuante */
 }
+
 
 .completed-list {
     position: absolute; /* rende la lista delle task completate fluttuante */
     z-index: 9999; /* la mette "al di sopra" di tutto il resto */
     max-height: 0;
     list-style: none;
-    overflow: hidden;
     /* le istruzioni left e transform fanno centrare perfettamente la lista */
     bottom: 60px; /* SPOSTATO: usa bottom per farla apparire sopra i tasti di input */
     left: 50%;
