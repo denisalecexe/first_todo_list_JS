@@ -31,6 +31,7 @@ let savedData = localStorage.getItem("tasks");
 permanentTask = JSON.parse(savedData) || [];
 console.log("Test: ", savedData); // mostra nella console i dati salvati nelle task
 
+// FOREACH LOOP
 // ciclo forEach che mantiene la memoria della lista anche al ricaricamento della pagina
 permanentTask.forEach(task => {
     // CREARE GLI ELEMENTI
@@ -109,6 +110,11 @@ permanentTask.forEach(task => {
             shopList.appendChild(li);
         }
     }
+
+    // evento per rendere cliccabile il tasto edit
+    editTask.addEventListener('click', () => {
+
+    })
 });
 
 // 2. FUNZIONI
