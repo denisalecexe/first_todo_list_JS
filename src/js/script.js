@@ -36,17 +36,17 @@ permanentTask.forEach(task => {
     // CREARE GLI ELEMENTI
     // crea gli li
     const li = document.createElement("li");
-    // crea l'icona per il trash
-    const iconTrash = document.createElement("i");
     // creare il checkbox
     const check = document.createElement("input");
     check.type = "checkbox";
     // creare lo span
     const span = document.createElement("span");
-    // crea l'icona per l'edit
+    // crea l'icona per il trash
+    const iconTrash = document.createElement("i");
+    // crea l'icona di edit
     const editTask = document.createElement("i");
 
-    // ASSEGNARE I VALORI E CLASSO
+    // ASSEGNARE I VALORI
     span.innerText = task.testo; // questo prende il testo dell'oggetto salvato
     iconTrash.classList.add("bi", "bi-trash-fill", "btn-delete");
     editTask.classList.add("bi", "bi-pencil-square", "btn-edit");
@@ -66,19 +66,18 @@ permanentTask.forEach(task => {
         }
     });
 
-    // evento per la logica del cestino
+    // evento per rendere funzionante l'icona del trash anche al ricaricamento
     iconTrash.addEventListener('click', () => {
-        li.remove(); // rimuove l'intero elemento li con tutte le icone e span compresi
+        li.remove();
         permanentTask = permanentTask.filter(t => t.testo !== task.testo);
-        localStorage.setItem("task", JSON.stringify(permanentTask));
-    })
-    
+        localStorage.setItem("tasks", JSON.stringify(permanentTask));
+    });
 
-    // ASSEMBLARE IL TASK
-    li.appendChild(iconTrash); // cestino a sinistra
+    // ASSEMBLA IL TASK
+    li.appendChild(iconTrash); // icona del trash
     li.appendChild(check); // checkbox
-    li.appendChild(span); //testo
-    li.appendChild(editTask); // edit a destra (grazie al "margin-left: auto;" nel CSS)
+    li.appendChild(span); // testo
+    li.appendChild(editTask); // icona dell'edit task 
 
     // DIREZIONA IL TASK IN TODO LISTO O SHOPPING LIST
     if (task.categoria === "todo") {
@@ -88,7 +87,7 @@ permanentTask.forEach(task => {
     }
 });
 
-// 2. FUNZIONI (la logica - la "ricetta")
+// 2. FUNZIONI
 // funzione che aggiunge una task alla todo
 function addToDoTask() {
     // inzializzazione e accesso all'elemento input HTML per l'input todo
@@ -122,13 +121,11 @@ function addToDoTask() {
         iconTrash.addEventListener('click', () => {
             // 1. rimuove l'elemento dalla vista (DOM)
             newTask.remove();
-
             // 2. filtra l'array permanente
             permanentTask = permanentTask.filter(task => task.testo !== todoArea);
-
             // 3. aggiorna il localStorage
             localStorage.setItem("tasks", JSON.stringify(permanentTask));
-        })
+        });
 
         // funzione per migliorare e decorare il checkbox in todo
         checkbox.addEventListener('change', function() {
@@ -194,18 +191,6 @@ function addShopTask() {
         // crea l'icona di edit
         const editTask = document.createElement("i");
 
-        // evento per rendere funzionante l'icona del trash
-        iconTrash.addEventListener('click', () => {
-            // 1. rimuove l'elemento dalla vista (DOM)
-            newShop.remove();
-
-            // 2. filtra l'array permanente
-            permanentTask = permanentTask.filter(task => task.testo !== shopArea);
-
-            // 3. aggiorna il localStorage
-            localStorage.setItem("tasks", JSON.stringify(permanentTask));
-        })
-
         // 2. CONFIGURAZIONE CHECKBOX E TESTO
         // serve per il browser per l'icona del trash
         iconTrash.classList.add("bi", "bi-trash-fill", "btn-delete");
@@ -216,6 +201,16 @@ function addShopTask() {
         
         // serve per il browser per l'icona dell'edit
         editTask.classList.add("bi", "bi-pencil-square", "btn-edit");
+
+        // evento per rendere funzionante l'icona del trash
+        iconTrash.addEventListener('click', () => {
+            // 1. rimuove l'elemento dalla vista (DOM)
+            newShop.remove();
+            // 2. filtra l'array permanente
+            permanentTask = permanentTask.filter(task => task.testo !== shopArea);
+            // 3. aggiorna il localStorage
+            localStorage.setItem("tasks", JSON.stringify(permanentTask));
+        });
 
         // funzione per migliorare e decorare il checkbox in shop
         checkbox.addEventListener('change', function() {
@@ -289,7 +284,7 @@ function clearShopInput() {
     }
 }
 
-// 3. GLI EVENTI (i grilletti) PER TODO E SHOP
+// 3. GLI EVENTI PER TODO E SHOP
 // metodo addEventListener in modo da rendere cliccabile il bottone e l'input e creare la prima forma di dinamicità al sito
 // bottone add per to do list
 btnAddTodo.addEventListener('click', addToDoTask);
