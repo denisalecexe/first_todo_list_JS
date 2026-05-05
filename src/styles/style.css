@@ -326,7 +326,7 @@ input[type="text"] {
 
 /* --- MEDIA QUERY PER RESPONSIVE WEB DESIGN --- */
 /* Questa regola dice: se lo schermo è sotto i 850px, metti le liste in colonna */
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 750px) {
     .container {
         flex-direction: column;
         padding-top: 50px; /* Un po' di spazio sopra per non toccare il bordo */
