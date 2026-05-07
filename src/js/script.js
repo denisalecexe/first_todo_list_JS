@@ -29,6 +29,12 @@ let permanentTask = [];
 let savedData = localStorage.getItem("tasks");
 // recupera i dati salvati e li traforma da stringa ad array e se il magazzino è vuoto, inizializza un array vuoto
 permanentTask = JSON.parse(savedData) || [];
+
+// funzione da richiamare per il salvataggio dei dati per migliorare la pulizia del codice
+function updateStorage() {
+    localStorage.setItem("tasks", JSON.stringify(permanentTask));
+}
+
 console.log("Test: ", savedData); // mostra nella console i dati salvati nelle task
 
 // FOREACH LOOP
@@ -79,14 +85,15 @@ permanentTask.forEach(task => {
                 shopList.appendChild(li);
             }
         }
-        localStorage.setItem("tasks", JSON.stringify(permanentTask)); // Salva la modifica
+        updateStorage(); // funzione aggiornata per il localStorage ed evitare ripetizione del codice
     });
 
     // evento per rendere funzionante l'icona del trash anche al ricaricamento
     iconTrash.addEventListener('click', () => {
         li.remove();
-        permanentTask = permanentTask.filter(t => t.testo !== task.testo);
-        localStorage.setItem("tasks", JSON.stringify(permanentTask));
+        // questa logica rimuove la task dall'array principale
+        permanentTask = permanentTask.filter(t => t !== task); 
+        updateStorage(); // funzione aggiornata per il localStorage ed evitare ripetizione del codice
     });
 
     // ASSEMBLA IL TASK
@@ -113,7 +120,13 @@ permanentTask.forEach(task => {
 
     // evento per rendere cliccabile il tasto edit
     editTask.addEventListener('click', () => {
+        const nuovoTesto = prompt("Inserisci la nuova task modificata:", task.testo); // "task.testo" come secondo parametro mostra il vecchio testo nel prompt
 
+        if (nuovoTesto !== null && nuovoTesto.trim() !== "") { // aggiunto "trim()" direttamente nel controllo per evitare salvataggi di soli spazi
+            task.testo = nuovoTesto.trim();
+            span.innerText = task.testo;
+            updateStorage(); // funzione aggiornata per il localStorage ed evitare ripetizione del codice
+        }
     })
 });
 
@@ -157,8 +170,8 @@ function addToDoTask() {
         // evento per rendere funzionante l'icona del trash
         iconTrash.addEventListener('click', () => {
             newTask.remove();
-            permanentTask = permanentTask.filter(task => task.testo !== todoArea);
-            localStorage.setItem("tasks", JSON.stringify(permanentTask));
+            permanentTask = permanentTask.filter(task => task !== newTodoTaskObj); // confronta l'oggetto invece del testo per sicurezza
+            updateStorage(); // funzione aggiornata per il localStorage ed evitare ripetizione del codice
         });
 
         // funzione per migliorare e decorare il checkbox in todo
@@ -174,7 +187,7 @@ function addToDoTask() {
                 newTodoTaskObj.completata = false; // aggiorna l'oggetto
                 todoList.appendChild(newTask);
             }
-            localStorage.setItem("tasks", JSON.stringify(permanentTask)); // Salva lo stato
+        updateStorage(); // funzione aggiornata per il localStorage ed evitare ripetizione del codice
         });
 
         // 3. ASSEMBLAGGIO 
@@ -188,7 +201,7 @@ function addToDoTask() {
         todoInputArea.value = ""; 
         
         permanentTask.push(newTodoTaskObj);
-        localStorage.setItem("tasks", JSON.stringify(permanentTask));
+        updateStorage(); // funzione aggiornata per il localStorage ed evitare ripetizione del codice
     } else {
         alert("Non hai scritto nessuna task da completare.")
     } 
@@ -219,8 +232,8 @@ function addShopTask() {
 
         iconTrash.addEventListener('click', () => {
             newShop.remove();
-            permanentTask = permanentTask.filter(task => task.testo !== shopArea);
-            localStorage.setItem("tasks", JSON.stringify(permanentTask));
+            permanentTask = permanentTask.filter(task => task !== newShopTaskObj); // confronto tra oggetti
+            updateStorage(); // funzione aggiornata per il localStorage ed evitare ripetizione del codice
         });
 
         checkbox.addEventListener('change', function() {
@@ -235,7 +248,7 @@ function addShopTask() {
                 newShopTaskObj.completata = false;
                 shopList.appendChild(newShop);
             }
-            localStorage.setItem("tasks", JSON.stringify(permanentTask));
+            updateStorage(); // funzione aggiornata per il localStorage ed evitare ripetizione del codice
         });
 
         newShop.appendChild(iconTrash); 
@@ -247,7 +260,7 @@ function addShopTask() {
         shopInputArea.value = ""; 
         
         permanentTask.push(newShopTaskObj);
-        localStorage.setItem("tasks", JSON.stringify(permanentTask));
+        updateStorage(); // funzione aggiornata per il localStorage ed evitare ripetizione del codice
     } else {
         alert("Non hai inserito nessun elemento da dover comprare.")
     };
