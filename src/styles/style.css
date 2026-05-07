@@ -152,6 +152,11 @@ input[type="text"] {
     opacity: 0.6;
 }
 
+/* stile da usare nel js per ecidenziare visivamente la task selezionata durante la navigazione con frecce */
+.selected {
+    outline: 3px var(--border-color) inset;
+}
+
 /* modifica riguardo il container dell'input dove scrivere le to do e il bottone */
 /* fa anche in modo di sembrare che il button sia all'interno dell'input, ma in realtà sono due elementi diversi e distinti */
 /* questa classe è il contenitore che racchiude input text e button */
