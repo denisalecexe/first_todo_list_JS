@@ -152,11 +152,6 @@ input[type="text"] {
     opacity: 0.6;
 }
 
-/* stile da usare nel js per ecidenziare visivamente la task selezionata durante la navigazione con frecce */
-.selected {
-    outline: 3px var(--border-color) inset;
-}
-
 /* modifica riguardo il container dell'input dove scrivere le to do e il bottone */
 /* fa anche in modo di sembrare che il button sia all'interno dell'input, ma in realtà sono due elementi diversi e distinti */
 /* questa classe è il contenitore che racchiude input text e button */
@@ -336,15 +331,23 @@ input[type="text"] {
 }
 
 /* --- MEDIA QUERY PER RESPONSIVE WEB DESIGN --- */
-/* Questa regola dice: se lo schermo è sotto i 850px, metti le liste in colonna */
+/* questa regola dice: se lo schermo è sotto i 850px, metti le liste in colonna */
 @media screen and (max-width: 750px) {
     .container {
         flex-direction: column;
-        padding-top: 50px; /* Un po' di spazio sopra per non toccare il bordo */
+        padding: 20px;
+        align-items: center;
     }
 
     .todo,
     .shopping {
-        margin: 15px 0; /* Margine sopra e sotto invece che ai lati */
+        width: 100%;
+        max-width: 400px;
+        min-height:320px;
+        margin: 15px 0;
+    }
+
+    input[type="text"] {
+        width: 100%;
     }
 }
