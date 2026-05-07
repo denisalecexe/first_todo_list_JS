@@ -160,14 +160,14 @@ function addToDoTask() {
         // serve per il browser per l'icona dell'edit
         editTask.classList.add("bi", "bi-pencil-square", "btn-edit");
 
-        // 5. MEMORIZZARE I DATI (Spostato qui per poterlo aggiornare nel checkbox)
+        // 3. MEMORIZZARE I DATI (spostato qui per poterlo aggiornare nel checkbox)
         const newTodoTaskObj = {
             testo: todoArea,
             categoria: "todo",
             completata: false,
         };
 
-        // evento per rendere funzionante l'icona del trash
+        // 4. EVENTO PER BTN TRASH
         iconTrash.addEventListener('click', () => {
             newTask.remove();
             permanentTask = permanentTask.filter(task => task !== newTodoTaskObj); // confronta l'oggetto invece del testo per sicurezza
@@ -190,18 +190,31 @@ function addToDoTask() {
         updateStorage(); // funzione aggiornata per il localStorage ed evitare ripetizione del codice
         });
 
-        // 3. ASSEMBLAGGIO 
+        // 5. ASSEMBLAGGIO 
         newTask.appendChild(iconTrash); 
         newTask.appendChild(checkbox); 
         newTask.appendChild(taskText); 
         newTask.appendChild(editTask); 
         todoList.appendChild(newTask); 
 
-        // 4. PUBBLICAZIONE
+        // 6. PUBBLICAZIONE
         todoInputArea.value = ""; 
         
+        // 7. SALVA LE TASK
         permanentTask.push(newTodoTaskObj);
         updateStorage(); // funzione aggiornata per il localStorage ed evitare ripetizione del codice
+
+        // 8. TASTO EDIT
+        // evento per rendere cliccabile il tasto edit
+        editTask.addEventListener('click', () => {
+            const nuovoTesto = prompt("Inserisci la nuova task modificata:", newTodoTaskObj.testo); // "task.testo" come secondo parametro mostra il vecchio testo nel prompt
+
+            if (nuovoTesto !== null && nuovoTesto.trim() !== "") { // aggiunto "trim()" direttamente nel controllo per evitare salvataggi di soli spazi
+                newTodoTaskObj.testo = nuovoTesto.trim();
+                taskText.innerText = newTodoTaskObj.testo;
+                updateStorage(); // funzione aggiornata per il localStorage ed evitare ripetizione del codice
+            }
+        })
     } else {
         alert("Non hai scritto nessuna task da completare.")
     } 
@@ -213,29 +226,34 @@ function addShopTask() {
     const shopArea = shopInputArea.value;
 
     if(shopArea !== "") {
+        // 1. CREAZIONE ELEMENTI
         const newShop = document.createElement("li");
         const iconTrash = document.createElement("i");
         const checkbox = document.createElement("input");
         const shopText = document.createElement("span");
         const editTask = document.createElement("i");
 
+        // 2. CONFIGURAZIONE TESTO E CHECKBOX
         iconTrash.classList.add("bi", "bi-trash-fill", "btn-delete");
         checkbox.type = "checkbox";
         shopText.innerText = shopArea;
         editTask.classList.add("bi", "bi-pencil-square", "btn-edit");
 
+        // 3. MEMORIZZARE I DATI (spostato qui per poterlo aggiornare nel checkbox)
         const newShopTaskObj = {
             testo: shopArea,
             categoria: "shopping",
             completata: false,
         };
 
+        // 4. EVENTO PER BTN TRASH
         iconTrash.addEventListener('click', () => {
             newShop.remove();
             permanentTask = permanentTask.filter(task => task !== newShopTaskObj); // confronto tra oggetti
             updateStorage(); // funzione aggiornata per il localStorage ed evitare ripetizione del codice
         });
 
+        // funzione per migliorare e decorare il checkbox in todo
         checkbox.addEventListener('change', function() {
             if(checkbox.checked) {
                 newShop.classList.add("completed");
@@ -251,16 +269,31 @@ function addShopTask() {
             updateStorage(); // funzione aggiornata per il localStorage ed evitare ripetizione del codice
         });
 
+        // 5. ASSEMBLAGGIO 
         newShop.appendChild(iconTrash); 
         newShop.appendChild(checkbox); 
         newShop.appendChild(shopText); 
         newShop.appendChild(editTask); 
         shopList.appendChild(newShop); 
 
+        // 6. PUBBLICAZIONE
         shopInputArea.value = ""; 
         
+        // 7. SALVA LE TASK
         permanentTask.push(newShopTaskObj);
         updateStorage(); // funzione aggiornata per il localStorage ed evitare ripetizione del codice
+
+        // 8. TASTO EDIT
+        // evento per rendere cliccabile il tasto edit
+        editTask.addEventListener('click', () => {
+        const nuovoTesto = prompt("Inserisci la nuova task modificata:", newShopTaskObj.testo); // "task.testo" come secondo parametro mostra il vecchio testo nel prompt
+
+            if (nuovoTesto !== null && nuovoTesto.trim() !== "") { // aggiunto "trim()" direttamente nel controllo per evitare salvataggi di soli spazi
+                newShopTaskObj.testo = nuovoTesto.trim();
+                shopText.innerText = newShopTaskObj.testo;
+                updateStorage(); // funzione aggiornata per il localStorage ed evitare ripetizione del codice
+            }
+        })
     } else {
         alert("Non hai inserito nessun elemento da dover comprare.")
     };
